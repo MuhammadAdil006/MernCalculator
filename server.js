@@ -1,6 +1,6 @@
 const express =require("express");
 const app = express();
-
+// body parser helps to access id values of form in json format
 const bodyparser = require("body-parser");
 const parse = require("nodemon/lib/cli/parse");
 
@@ -12,7 +12,16 @@ console.log("server is running on port 3000");
 app.get("/",function(req,res){
 res.sendFile("index.html",{root:__dirname});
 });
-
+app.get("/bmicalculator",function(req,res){
+res.sendFile("bmicalculator.html",{root:__dirname});
+});
+app.post("/bmicalculator",function(req,res){
+     console.log(req.body);
+     var weight = parseInt(req.body.weight);
+     var height = parseInt(req.body.height);
+     var bmi = weight/(height*height);
+     res.send("your bmi is "+bmi);
+});
 app.post("/",function(req,res){
     console.log(req.body);
     var a;
